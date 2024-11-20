@@ -1,0 +1,111 @@
+[gd_scene load_steps=10 format=3 uid="uid://b65s7nerdowwc"]
+
+[ext_resource type="Script" path="res://welcome/Background.gd" id="1_3jybj"]
+[ext_resource type="Texture2D" uid="uid://cl8rbsi82eb1d" path="res://welcome/origbig.png" id="1_rbqm0"]
+[ext_resource type="FontFile" uid="uid://571l1nqrtkih" path="res://balanca_jogo/botao/CelticHand.ttf" id="2_40llb"]
+[ext_resource type="PackedScene" uid="uid://daongao5bnwr" path="res://transition/transition.tscn" id="4_mlwcu"]
+[ext_resource type="AudioStream" uid="uid://bme3lb4hfjf24" path="res://welcome/wind-chimes-with-wind-and-light-rain-171624.mp3" id="5_s3fuf"]
+[ext_resource type="AudioStream" uid="uid://grcnrwe3v16g" path="res://welcome/ttsMP3.com_VoiceText_2024-10-28_21-1-50.mp3" id="6_hl38r"]
+
+[sub_resource type="Animation" id="Animation_fka0f"]
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
+[sub_resource type="Animation" id="Animation_15lv6"]
+resource_name = "fade_in_introduction"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 0.415686)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6.6, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 2,
+"values": ["", "", "A aventura te aguarda,
+ nobre viajante!"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t6q2h"]
+_data = {
+"RESET": SubResource("Animation_fka0f"),
+"fade_in_introduction": SubResource("Animation_15lv6")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("1_3jybj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(576, 324)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_rbqm0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
+libraries = {
+"": SubResource("AnimationLibrary_t6q2h")
+}
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+offset_left = -99.0
+offset_top = -99.0
+offset_right = 1238.0
+offset_bottom = 676.0
+color = Color(1, 1, 1, 0)
+
+[node name="Label" type="Label" parent="Background"]
+offset_left = 2.0
+offset_top = 200.0
+offset_right = 1152.0
+offset_bottom = 397.0
+theme_override_fonts/font = ExtResource("2_40llb")
+theme_override_font_sizes/font_size = 80
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SceneTransitionAnimation" parent="." instance=ExtResource("4_mlwcu")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_s3fuf")
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_hl38r")

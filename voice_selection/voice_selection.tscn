@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://qg1bw580avr"]
+
+[ext_resource type="Texture2D" uid="uid://ccrox368syg4s" path="res://voice_selection/background/origbig.png" id="1_cgpyf"]
+[ext_resource type="Script" path="res://transition/Sprite2D.gd" id="1_j8gse"]
+[ext_resource type="Texture2D" uid="uid://dmputood55i0m" path="res://voice_selection/animation/oie_transparent (15).png" id="2_ynuw4"]
+[ext_resource type="Texture2D" uid="uid://codqx4s7ykk0p" path="res://voice_selection/animation/oie_transparent (16).png" id="3_80f86"]
+[ext_resource type="Texture2D" uid="uid://bpharfjbjges5" path="res://voice_selection/animation/oie_transparent (17).png" id="4_sgre4"]
+[ext_resource type="Texture2D" uid="uid://b87mvdqxp0hqi" path="res://voice_selection/animation/oie_transparent (18).png" id="5_kijch"]
+[ext_resource type="Texture2D" uid="uid://c44repqnj1j24" path="res://voice_selection/animation/oie_transparent (19).png" id="6_f15or"]
+[ext_resource type="PackedScene" uid="uid://daongao5bnwr" path="res://transition/transition.tscn" id="7_lio05"]
+[ext_resource type="FontFile" uid="uid://571l1nqrtkih" path="res://balanca_jogo/botao/CelticHand.ttf" id="8_owudm"]
+[ext_resource type="AudioStream" uid="uid://40c2syt8xyun" path="res://voice_selection/selection_explanation.mp3" id="9_qs0hb"]
+[ext_resource type="AudioStream" uid="uid://bk1do20qyl3ki" path="res://voice_selection/confirmation_explanation.mp3" id="10_lxoku"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7fcar"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ynuw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_80f86")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sgre4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kijch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f15or")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kijch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sgre4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_80f86")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="voice_selection" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("1_cgpyf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 370)
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_j8gse")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+sprite_frames = SubResource("SpriteFrames_7fcar")
+frame = 4
+frame_progress = 0.8672
+
+[node name="SceneTransitionAnimation" parent="." instance=ExtResource("7_lio05")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 81.0
+offset_top = 40.0
+offset_right = 1071.0
+offset_bottom = 148.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_owudm")
+theme_override_font_sizes/font_size = 50
+text = "Escolha a voz de quem irá te acompanhar nessa jornada usando as setas do teclado"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SelectionExplanation" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_qs0hb")
+
+[node name="ConfirmationExplanation" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_lxoku")

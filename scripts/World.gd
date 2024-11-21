@@ -12,16 +12,7 @@ extends Node2D
 @onready var op_3 := $Keys/Key3/op3
 @onready var op_4 := $Keys/Key4/op4
 
-var Voices:Array[Dictionary]=DisplayServer.tts_get_voices()
-var speaker:String = Voices[0]["id"]
-var falas_speak = 0
-var errors = 0;
-var write_anw
-var first_time = true
-var speak_enum 
-var congrats = "Parabéns jovem aluno! Você recebeu uma moeda dourada!"
-var explain = "Você errou jovem aluno! Para abrirmos o baú, o resultado da expressão da chave deve ser o mesmo resultado da expressão do baú! Você consegue, vamos tentar outra vez!"
-var falas = [
+@onready var falas = [
 	"Hum... veja só o que encontramos na floresta, um baú encantado! ",
 	"Ele parece estar trancado, deve guardar algo muito valioso...",
 	"Mas veja só, tem 4 chaves e uma mensagem perto dele",
@@ -29,6 +20,18 @@ var falas = [
 	"caso a chave errada seja usada 3 vezes, o baú irá se destruir!",
 	"para abrirmos o baú, devemos usar a chave que contem uma expressão de mesmo valor que no cadeado do baú!",
 ]
+
+@onready var Voices=DisplayServer.tts_get_voices_for_language("pt")
+@onready var speaker:String = Voices[Global.selected_voice_id]
+
+var falas_speak = 0
+var errors = 0;
+var write_anw
+var first_time = true
+var speak_enum 
+var congrats = "Parabéns jovem aluno! Você recebeu uma moeda dourada!"
+var explain = "Você errou jovem aluno! Para abrirmos o baú, o resultado da expressão da chave deve ser o mesmo resultado da expressão do baú! Você consegue, vamos tentar outra vez!"
+
 # 4 alternativas | enunciado | resposta 
 var options = [
 	["2+6", "4+9", "5+5","3+4","3+7","3"],			#A1
@@ -42,6 +45,7 @@ var options = [
 	["7+2", "5-6", "7+4","7+2","5+6","3"],			#A9
 	["20+12", "42-8", "38-4","19+16","40-5","4"],	#A10
 ]
+
 
 func _random_keys():
 	var random_index = randi() % options.size()
@@ -70,7 +74,7 @@ func _quiz():
 
 func _input(event: InputEvent):
 
-	if event is InputEventKey and event.keycode == KEY_ENTER and event.pressed:
+	if (event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
 		if falas_speak <= falas.size() - 1:
 			DisplayServer.tts_stop()
 			DisplayServer.tts_speak(falas[falas_speak], speaker)
@@ -81,8 +85,8 @@ func _input(event: InputEvent):
 		elif (line_ed.text!=""):
 			DisplayServer.tts_stop()
 			_on_line_edit_text_submitted(line_ed.text)
-
-	elif event is InputEventKey and event.keycode != KEY_ENTER and event.pressed:
+	
+	elif event is InputEventKey and event.keycode != KEY_ENTER and event.keycode != KEY_KP_ENTER and event.pressed:
 		if event.keycode >= KEY_KP_0 and event.keycode <= KEY_KP_9 :
 			line_ed.text= str(OS.get_keycode_string(event.physical_keycode)).substr(3,1)
 		elif event.keycode >= KEY_0 and event.keycode <= KEY_9:
@@ -94,7 +98,7 @@ func _input(event: InputEvent):
 	if Dialogic.current_timeline != null:
 		return
 
-	if event is InputEventKey and event.keycode == KEY_ENTER and event.pressed and (falas_speak < falas.size()) :
+	if (event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
 		Dialogic.start('Quiz')
 		get_viewport().set_input_as_handled()
 

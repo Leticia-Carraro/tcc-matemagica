@@ -75,7 +75,8 @@ animations = [{
 script = ExtResource("1_6b8qr")
 
 [node name="Wood" type="Sprite2D" parent="."]
-position = Vector2(400, 300)
+position = Vector2(576, 324)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_ru8cs")
 
 [node name="background_music" type="AudioStreamPlayer" parent="."]
@@ -93,11 +94,12 @@ shape = SubResource("RectangleShape2D_ow004")
 [node name="Box" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Box"]
-position = Vector2(423.5, 547.5)
+position = Vector2(576, 547.5)
 shape = SubResource("RectangleShape2D_bh8tv")
 
 [node name="img" type="Sprite2D" parent="Box"]
-position = Vector2(424, 546)
+position = Vector2(576, 509.5)
+scale = Vector2(1, 1.57031)
 texture = ExtResource("2_jcev4")
 
 [node name="Coin" type="Sprite2D" parent="."]
@@ -108,7 +110,7 @@ scale = Vector2(0.159213, 0.14539)
 texture = ExtResource("5_7pak1")
 
 [node name="Trunk" type="AnimatedSprite2D" parent="."]
-position = Vector2(423, 482)
+position = Vector2(575, 417)
 sprite_frames = SubResource("SpriteFrames_a14s5")
 animation = &"Open"
 
@@ -116,12 +118,13 @@ animation = &"Open"
 stream = ExtResource("7_ip5ar")
 
 [node name="Cloud" type="Sprite2D" parent="."]
-position = Vector2(400, 201.125)
+position = Vector2(576, 182.125)
 scale = Vector2(1.73478, 1.31436)
 texture = ExtResource("4_ku4tf")
 
 [node name="Keys" type="Node2D" parent="."]
 visible = false
+position = Vector2(200, 0)
 
 [node name="reset_timer" type="Timer" parent="Keys"]
 wait_time = 7.0

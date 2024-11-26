@@ -40,14 +40,18 @@ func _play_answer2():
 	
 func _play_congrats():
 	$Congrats1.play()
-
+	await get_tree().create_timer(16).timeout
+	get_tree().change_scene_to_file("res://scenes/levels/level2.tscn")
+		
 func _play_congrats2():
 	$Congrats2.play()
 	
 func _play_backmusic():
-	if not mute:
+	if not mute and AutoloadScene.previous_scene == "res://scenes/levels/level1.tscn":
 		$BackgroundMusic.play()
+	else: 
+		$BackgroundMusic.stop()
 
 func _play_backmusic2():
-	if not mute:
+	if not mute and AutoloadScene.previous_scene == "res://scenes/levels/level2.tscn":
 		$BackgroundMusic2.play()

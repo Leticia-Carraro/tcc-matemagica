@@ -112,6 +112,7 @@ func _process(delta):
 func _on_solve_text_submitted(new_text):
 	if new_text == str(result):
 		AudioController._play_congrats2()
+		DisplayServer.tts_stop()
 	else:
 		counter += 1
 		if counter > 2:

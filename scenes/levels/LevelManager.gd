@@ -19,6 +19,7 @@ var pitch = 2.0
 var speaker: String = DisplayServer.tts_get_voices_for_language("pt_BR")[0]
 var y_margin =  0.25
 var y_axis = -0.4
+var win = false
 
 func _ready():
 	i = 0
@@ -101,7 +102,7 @@ func _process(delta):
 		texto_4.show()
 		var text4: String = $"../UI/Dialogue/texto_4/Label".get("text")
 		DisplayServer.tts_speak(text4, speaker, volume, pitch, speed, 1)
-		if counter > 2:
+		if counter > 2 or win == true:
 			DisplayServer.tts_stop()
 		else:
 			DisplayServer.tts_pause()
@@ -111,7 +112,10 @@ func _process(delta):
 
 func _on_solve_text_submitted(new_text):
 	if new_text == str(result):
+		win = true
 		AudioController._play_congrats()
+		AutoloadScene.previous_scene = "res://scenes/levels/level2.tscn"
+		AudioController._play_backmusic()
 	else:
 		counter += 1
 		if counter > 2:

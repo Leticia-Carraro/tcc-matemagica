@@ -29,8 +29,9 @@ func _on_audio_pressed():
 
 
 func _on_sair_pressed():
-	pass # Replace with function body.
-
+	DisplayServer.tts_stop() # Replace with function body.
+	AudioController._play_select()
+	get_tree().change_scene_to_file("res://level_selection/level_selection.tscn")
 
 func _on_audio_focus_entered():
 	DisplayServer.tts_speak("Áudio", speaker, volume, 1.0, speed, 1)

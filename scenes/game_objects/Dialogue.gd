@@ -4,8 +4,8 @@ extends Control
 @onready var label2 = $texto_2/Label
 @onready var label3 = $texto_3/Label
 @onready var label4 = $texto_4/Label
-@onready var character_body_2d_3 = $"../../SceneObjects/Characters/CharacterBody2D3"
-@onready var character_body_2d_5 = $"../../SceneObjects/Characters/CharacterBody2D5"
+@onready var piglet_1 = $"../../SceneObjects/Characters/piglet1"
+@onready var piglet_2 = $"../../SceneObjects/Characters/piglet2"
 
 var number1 = [40,55,47,33,52]
 var number2 = [3, 3, 2, 4, 4]
@@ -40,8 +40,8 @@ func _ready():
 	label4.label_settings.outline_size = 3
 	
 	if number2[v] == 2:
-		character_body_2d_3.hide()
-		character_body_2d_5.hide()
+		piglet_1.hide()
+		piglet_2.hide()
 		
 	if number2[v] == 3:
-		character_body_2d_5.hide()
+		piglet_2.hide()

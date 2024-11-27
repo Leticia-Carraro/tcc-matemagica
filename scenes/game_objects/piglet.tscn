@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://dkg5ckcd7kpxy"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/Pig.gd" id="1_jl33p"]
+[ext_resource type="Texture2D" uid="uid://dllnub0nexfri" path="res://assets/characters/IdlePig-removebg-preview.png" id="2_17kla"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj1nv"]
+atlas = ExtResource("2_17kla")
+region = Rect2(348, 6, 116, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miya7"]
+atlas = ExtResource("2_17kla")
+region = Rect2(0, 6, 116, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgu63"]
+atlas = ExtResource("2_17kla")
+region = Rect2(116, 6, 116, 98)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y2v7"]
+atlas = ExtResource("2_17kla")
+region = Rect2(232, 6, 116, 98)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lcu7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj1nv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miya7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgu63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y2v7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvhbn"]
+size = Vector2(109, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8hhun"]
+size = Vector2(110, 109)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_jl33p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(155.25, 82.7501)
+scale = Vector2(1.18534, 1.35204)
+sprite_frames = SubResource("SpriteFrames_lcu7q")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(178, 166)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-22, -73)
+shape = SubResource("RectangleShape2D_gvhbn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(156, 93)
+shape = SubResource("RectangleShape2D_8hhun")

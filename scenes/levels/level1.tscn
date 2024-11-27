@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://clnqdp0aeg01b"]
+[gd_scene load_steps=14 format=3 uid="uid://clnqdp0aeg01b"]
 
 [ext_resource type="Script" path="res://scenes/levels/LevelManager.gd" id="1_ommyh"]
 [ext_resource type="Texture2D" uid="uid://qcnclwul7odb" path="res://assets/background/Summer1.png" id="2_hkykd"]
 [ext_resource type="Script" path="res://scenes/game_objects/Camera2D.gd" id="3_l4uet"]
 [ext_resource type="PackedScene" uid="uid://djt0c3m2mi6a2" path="res://scenes/game_objects/pig.tscn" id="4_082ey"]
+[ext_resource type="PackedScene" uid="uid://dkg5ckcd7kpxy" path="res://scenes/game_objects/piglet.tscn" id="5_2213q"]
 [ext_resource type="Texture2D" uid="uid://dwmw4h0pr54hi" path="res://assets/background/Terrain (16x16).png" id="5_rlleu"]
 [ext_resource type="Script" path="res://scenes/game_objects/Dialogue.gd" id="6_puaqg"]
 [ext_resource type="Texture2D" uid="uid://ceh5dnqb6fopq" path="res://assets/characters/Pig_Avatar.png" id="7_7kulk"]
@@ -492,20 +493,20 @@ script = ExtResource("3_l4uet")
 
 [node name="Characters" type="Node" parent="SceneObjects"]
 
-[node name="CharacterBody2D" parent="SceneObjects/Characters" instance=ExtResource("4_082ey")]
+[node name="Pig" parent="SceneObjects/Characters" instance=ExtResource("4_082ey")]
 position = Vector2(30, 1196)
 
-[node name="CharacterBody2D2" parent="SceneObjects/Characters" instance=ExtResource("4_082ey")]
-position = Vector2(1013, 1197)
+[node name="piglet0" parent="SceneObjects/Characters" instance=ExtResource("5_2213q")]
+position = Vector2(871, 1219)
 
-[node name="CharacterBody2D4" parent="SceneObjects/Characters" instance=ExtResource("4_082ey")]
-position = Vector2(1397, 1196)
+[node name="piglet1" parent="SceneObjects/Characters" instance=ExtResource("5_2213q")]
+position = Vector2(1064, 1262)
 
-[node name="CharacterBody2D3" parent="SceneObjects/Characters" instance=ExtResource("4_082ey")]
-position = Vector2(1200, 1198)
+[node name="piglet2" parent="SceneObjects/Characters" instance=ExtResource("5_2213q")]
+position = Vector2(1435, 1200)
 
-[node name="CharacterBody2D5" parent="SceneObjects/Characters" instance=ExtResource("4_082ey")]
-position = Vector2(1592, 1198)
+[node name="piglet3" parent="SceneObjects/Characters" instance=ExtResource("5_2213q")]
+position = Vector2(1756, 1245)
 
 [node name="TileMap" type="TileMap" parent="SceneObjects"]
 visible = false

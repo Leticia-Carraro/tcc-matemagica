@@ -16,7 +16,8 @@ var j = 0
 var counter = 0
 var result
 var pitch = 1.0
-var speaker: String = DisplayServer.tts_get_voices_for_language("pt_BR")[0]
+var voices = DisplayServer.tts_get_voices_for_language("pt")
+var speaker = voices[Global.selected_voice_id]
 var y_margin =  0.25
 var y_axis = -0.4
 

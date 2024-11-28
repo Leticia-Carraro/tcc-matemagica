@@ -31,6 +31,7 @@ func _on_audio_pressed():
 func _on_sair_pressed():
 	DisplayServer.tts_stop() # Replace with function body.
 	AudioController._play_select()
+	AutoloadScene.previous_scene == "res://level_selection/level_selection.tscn"
 	get_tree().change_scene_to_file("res://level_selection/level_selection.tscn")
 
 func _on_audio_focus_entered():

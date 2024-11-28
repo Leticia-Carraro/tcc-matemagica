@@ -21,6 +21,7 @@ func _play_try():
 
 func _pause_backmusic(opt):
 	$BackgroundMusic.set_stream_paused(opt)
+	$BackgroundMusic2.set_stream_paused(opt)
 	
 func _play_answer():
 	$Wrong.play()
@@ -45,6 +46,8 @@ func _play_congrats():
 		
 func _play_congrats2():
 	$Congrats2.play()
+	await get_tree().create_timer(16).timeout
+	get_tree().change_scene_to_file("res://level_selection/level_selection.tscn")
 	
 func _play_backmusic():
 	if not mute and AutoloadScene.previous_scene == "res://scenes/levels/level1.tscn":
@@ -55,3 +58,5 @@ func _play_backmusic():
 func _play_backmusic2():
 	if not mute and AutoloadScene.previous_scene == "res://scenes/levels/level2.tscn":
 		$BackgroundMusic2.play()
+	else: 
+		$BackgroundMusic.stop()

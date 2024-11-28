@@ -12,25 +12,16 @@ extends Node2D
 @onready var op_3 := $Keys/Key3/op3
 @onready var op_4 := $Keys/Key4/op4
 
-@onready var falas = [
-	"Hum... veja só o que encontramos na floresta, um baú encantado! ",
-	"Ele parece estar trancado, deve guardar algo muito valioso...",
-	"Mas veja só, tem 4 chaves e uma mensagem perto dele",
-	"A mensagem diz que apenas a chave certa abrirá o baú",
-	"caso a chave errada seja usada 3 vezes, o baú irá se destruir!",
-	"para abrirmos o baú, devemos usar a chave que contem uma expressão de mesmo valor que no cadeado do baú!",
-]
-
 @onready var Voices=DisplayServer.tts_get_voices_for_language("pt")
 @onready var speaker:String = Voices[Global.selected_voice_id]
 
 var falas_speak = 0
 var errors = 0;
 var write_anw
-var first_time = true
 var speak_enum 
-var congrats = "Parabéns jovem aluno! Você recebeu uma moeda dourada!"
-var explain = "Você errou jovem aluno! Para abrirmos o baú, o resultado da expressão da chave deve ser o mesmo resultado da expressão do baú! Você consegue, vamos tentar outra vez!"
+var congrats = "Parabéns viajante! Você recebeu uma moeda dourada!"
+var explain = "Você errou, viajante! Para abrirmos o baú, o resultado da expressão da chave deve ser o mesmo resultado da expressão do baú! Você consegue, vamos tentar outra vez!"
+var explain_basic = "Não parece certo, vamos tentar outra vez!"
 
 # 4 alternativas | enunciado | resposta 
 var options = [
@@ -46,6 +37,7 @@ var options = [
 	["20+12", "42-8", "38-4","19+16","40-5","4"],	#A10
 ]
 func _ready():
+	_quiz()
 	AutoloadScene.previous_scene = "res://Levels/Trunk_Puzzle.tscn"
 	
 func _random_keys():
@@ -64,6 +56,8 @@ func _on_line_edit_text_submitted(new_text):
 		write_ans()
 	else:
 		line_ed.text = ""
+		Dialogic.start('wrong_simple')
+		DisplayServer.tts_speak(explain_basic, speaker)
 		errors+= 1
 		if errors == 3 :
 			wrong_ans()
@@ -74,20 +68,13 @@ func _quiz():
 	speak_exerc()
 
 func _input(event: InputEvent):
-
+	
 	if (event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
-		if falas_speak <= falas.size() - 1:
-			DisplayServer.tts_stop()
-			DisplayServer.tts_speak(falas[falas_speak], speaker)
-			falas_speak+=1
-		elif (first_time):
-			first_time = false
-			_quiz()
-		elif (line_ed.text!=""):
+		if (line_ed.text!=""):
 			DisplayServer.tts_stop()
 			_on_line_edit_text_submitted(line_ed.text)
-	
-	elif event is InputEventKey and event.keycode != KEY_ENTER and event.keycode != KEY_KP_ENTER and event.pressed:
+
+	if event is InputEventKey and event.keycode != KEY_ENTER and event.keycode != KEY_KP_ENTER and event.pressed:
 		if event.keycode >= KEY_KP_0 and event.keycode <= KEY_KP_9 :
 			line_ed.text= str(OS.get_keycode_string(event.physical_keycode)).substr(3,1)
 		elif event.keycode >= KEY_0 and event.keycode <= KEY_9:
@@ -96,14 +83,15 @@ func _input(event: InputEvent):
 			speak_exerc()
 
 	# check if a dialog is already running
-	if Dialogic.current_timeline != null:
-		return
-
-	if (event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
-		Dialogic.start('Quiz')
-		get_viewport().set_input_as_handled()
+	#if Dialogic.current_timeline != null:
+		#return
+#
+	#if (event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
+		#Dialogic.start('Quiz')
+		#get_viewport().set_input_as_handled()
 		
-	if event.keycode == KEY_ESCAPE:
+	if event is InputEventKey and event.keycode == KEY_ESCAPE:
+			Dialogic.end_timeline()
 			DisplayServer.tts_stop()
 			AudioController._play_select()
 			AudioController._pause_backmusic(true)

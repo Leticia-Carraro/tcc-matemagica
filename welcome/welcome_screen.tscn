@@ -37,6 +37,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_15lv6"]
 resource_name = "fade_in_introduction"
 length = 10.0
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

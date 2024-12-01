@@ -52,7 +52,7 @@ func submit_answer():
 
 func speak_text(text: String):
 	DisplayServer.tts_stop()
-	var voices = DisplayServer.tts_get_voices_for_language("pt")
+	var voices = DisplayServer.tts_get_voices_for_language("pt_BR")
 	var voice_id = voices[Global.selected_voice_id]
 
 	DisplayServer.tts_speak(text, voice_id, 50, 1.0, 0.8)

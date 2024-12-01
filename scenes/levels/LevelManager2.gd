@@ -22,6 +22,7 @@ var y_position #vertical camera position
 
 func _ready():
 	x_position = -1
+	cur_position = -1
 	y_margin =  0.25
 	y_position = -0.4
 	counter = 0
@@ -57,7 +58,7 @@ func _process(delta):
 		y_position = -1.0
 		y_margin = 1.0
 		solve.grab_focus()
-		AudioController._play_select()
+		AudioController._play_question()
 		DisplayServer.tts_stop()
 		
 	if Input.is_action_just_pressed("down"):

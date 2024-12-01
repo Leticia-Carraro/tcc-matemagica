@@ -8,24 +8,21 @@ extends Node
 @onready var texto_4 = $"../UI/Dialogue/texto_4"
 @onready var dialogue = $"../UI/Dialogue"
 
-@export var speed:float = 1.3;
-@export var volume:int = 70;
-
-var i = 0
-var j = 0
-var counter = 0
+var counter #counts wrong answers
 var result
-var pitch = 2.0
-var voices = DisplayServer.tts_get_voices_for_language("pt")
-var speaker = voices[Global.selected_voice_id]
-var y_margin =  0.25
-var y_axis = -0.4
-var win = false
+var pitch = 2.0 #tts config
+var speed = 1.3 #tts config
+var volume = 70 #tts config
+var speaker: String = DisplayServer.tts_get_voices_for_language("pt_BR")[0] #tts config
+var cur_position #current horizontal camera position
+var x_position #horizontal camera position
+var y_margin  #vertical camera margin
+var y_position #vertical camera position
 
 func _ready():
-	i = 0
+	x_position = -1
 	y_margin =  0.25
-	y_axis = -0.4
+	y_position = -0.4
 	counter = 0
 	result = dialogue.result 
 	AutoloadScene.previous_scene = "res://scenes/levels/level1.tscn"
@@ -33,87 +30,84 @@ func _ready():
 	AudioController._play_backmusic()
 	
 func _process(delta):
-	var cam_y = camera_2d.get_drag_margin(SIDE_BOTTOM)
-	var position = [-1.0, 0.0, 1.0]
+	#input button action
 	if Input.is_action_just_pressed("pause"):
 		DisplayServer.tts_stop()
 		AudioController._play_select()
 		AudioController._pause_backmusic(true)
 		get_tree().change_scene_to_file("res://scenes/menu/menu_pausa.tscn")
 		
-		
 	if Input.is_action_just_pressed("left"):
-		i = i-1
-		if i < 0:
-			i = 0
-		j = i
+		x_position -= 1
+		if x_position < 0:
+			x_position = -1
+		cur_position = x_position
 		DisplayServer.tts_stop()
 		
 	if Input.is_action_just_pressed("right"):
-		i = i+1
-		if i > 2:
-			i = 2
-		j = i
+		x_position += 1
+		if x_position > 1:
+			x_position = 1
+		cur_position = x_position
 		DisplayServer.tts_stop()
 		
 	if Input.is_action_just_pressed("up"):
-		i = 1
-		y_axis = -1.0
+		x_position = 0
+		y_position = -1.0
 		y_margin = 1.0
 		solve.grab_focus()
+		AudioController._play_select()
 		DisplayServer.tts_stop()
 		
 	if Input.is_action_just_pressed("down"):
-		i = j
-		y_axis = -0.4
+		x_position = cur_position
+		y_position = -0.4
 		y_margin = 0.25
 		DisplayServer.tts_stop()
-		
-	if y_axis == -1:
-		camera_2d.set_drag_horizontal_offset(position[1])
+	
+	#Dragging camera
+	if y_position == -0.4:
+		camera_2d.set_drag_horizontal_offset(x_position)
 	else:
-		camera_2d.set_drag_horizontal_offset(position[i])
-	camera_2d.set_drag_vertical_offset(y_axis)
+		camera_2d.set_drag_horizontal_offset(0)
+	camera_2d.set_drag_vertical_offset(y_position)
 	camera_2d.set_drag_margin(SIDE_BOTTOM, y_margin)
-	if position[i] == -1.0 and camera_2d.get_drag_margin(SIDE_BOTTOM) < 0.3:
+	
+	#showing/hiding texts and audiodescription according camera position
+	if x_position == -1.0 and y_position == -0.4:
 		texto_1.show()
 		var text1: String = $"../UI/Dialogue/texto_1/Label".get("text")
-		DisplayServer.tts_speak(text1,speaker, volume, pitch, speed, 0)
-		DisplayServer.tts_pause()
+		_speak(text1)
 	else:
 		texto_1.hide()
 		
-	if position[i] == 0 and camera_2d.get_drag_margin(SIDE_BOTTOM) < 0.3 : 
+	if x_position == 0 and y_position == -0.4:
 		texto_2.show()
 		var text2: String = $"../UI/Dialogue/texto_2/Label".get("text")
-		DisplayServer.tts_speak(text2, speaker, volume, pitch, speed, 1)
-		DisplayServer.tts_pause()
+		_speak(text2)
 	else:
 		texto_2.hide()
 		
-	if position[i] == 1.0 and camera_2d.get_drag_margin(SIDE_BOTTOM) < 0.3:
+	if x_position == 1.0 and y_position == -0.4:
 		texto_3.show()
 		var text3: String = $"../UI/Dialogue/texto_3/Label".get("text")
-		DisplayServer.tts_speak(text3, speaker, volume, pitch, speed, 2)
-		DisplayServer.tts_pause()
+		_speak(text3)
 	else:
 		texto_3.hide()
 		
-	if camera_2d.get_drag_margin(SIDE_BOTTOM) > 0.3 : 
+	if  y_position == -1.0: 
 		texto_4.show()
-		var text4: String = $"../UI/Dialogue/texto_4/Label".get("text")
-		DisplayServer.tts_speak(text4, speaker, volume, pitch, speed, 1)
-		if counter > 2 or win == true:
-			DisplayServer.tts_stop()
-		else:
-			DisplayServer.tts_pause()
-		
 	else:
 		texto_4.hide()
 
+#enables tts_speak
+func _speak(text):
+	DisplayServer.tts_speak(text, speaker, volume, pitch, speed, 2)
+	DisplayServer.tts_pause()
+	
+#sets effects after submitting text in LineEdit
 func _on_solve_text_submitted(new_text):
 	if new_text == str(result):
-		win = true
 		AudioController._play_congrats()
 		AutoloadScene.previous_scene = "res://scenes/levels/level2.tscn"
 		AudioController._play_backmusic()
@@ -124,3 +118,7 @@ func _on_solve_text_submitted(new_text):
 		else:
 			AudioController._play_try()
 	solve.text = ""
+
+#sets audiodescription in LineEdit
+func _on_solve_text_changed(new_text):
+	DisplayServer.tts_speak(new_text, speaker, volume, pitch, speed, 1)

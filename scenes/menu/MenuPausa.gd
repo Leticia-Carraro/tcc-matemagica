@@ -4,7 +4,7 @@ extends Node
 @onready var continuar = $Backend/VBoxContainer/Continuar
 @onready var audio = $Backend/VBoxContainer/Audio
 
-var voices = DisplayServer.tts_get_voices_for_language("pt")
+var voices = DisplayServer.tts_get_voices_for_language("pt_BR")
 var speaker: String = voices[Global.selected_voice_id]
 var speed = 1.2
 var volume = 70

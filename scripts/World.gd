@@ -12,7 +12,7 @@ extends Node2D
 @onready var op_3 := $Keys/Key3/op3
 @onready var op_4 := $Keys/Key4/op4
 
-@onready var Voices=DisplayServer.tts_get_voices_for_language("pt")
+@onready var Voices=DisplayServer.tts_get_voices_for_language("pt_BR")
 @onready var speaker:String = Voices[Global.selected_voice_id]
 
 var falas_speak = 0

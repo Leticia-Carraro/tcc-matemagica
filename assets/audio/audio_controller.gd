@@ -30,7 +30,13 @@ func _play_answer():
 	await $Answer1.finished
 	AutoloadScene._random(AutoloadScene.random_number)
 	get_tree().reload_current_scene()
-
+	
+func _play_question():
+	if AutoloadScene.previous_scene == "res://scenes/levels/level1.tscn":
+		$Question1.play()
+	elif AutoloadScene.previous_scene == "res://scenes/levels/level2.tscn":
+		$Question2.play()
+	
 func _play_answer2():
 	$Wrong.play()
 	await $Wrong.finished
@@ -41,11 +47,17 @@ func _play_answer2():
 	
 func _play_congrats():
 	$Congrats1.play()
-	await get_tree().create_timer(16).timeout
+	$applause.play()
+	await get_tree().create_timer(14.5).timeout
+	$pig.play()
+	await get_tree().create_timer(0.5).timeout
+	$pig.play()
+	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://scenes/levels/level2.tscn")
 		
 func _play_congrats2():
 	$Congrats2.play()
+	$applause.play()
 	await get_tree().create_timer(16).timeout
 	get_tree().change_scene_to_file("res://level_selection/level_selection.tscn")
 	

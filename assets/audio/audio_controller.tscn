@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://btnwxy8iryc5o"]
+[gd_scene load_steps=17 format=3 uid="uid://btnwxy8iryc5o"]
 
 [ext_resource type="Script" path="res://assets/audio/audio_controller.gd" id="1_dsool"]
 [ext_resource type="AudioStream" uid="uid://bvri5wutemcx" path="res://assets/audio/birds-singing-in-the-morning_nature-sound-146832.mp3" id="2_j46yf"]
@@ -12,6 +12,10 @@
 [ext_resource type="AudioStream" uid="uid://7nmvey01w7nv" path="res://assets/audio/windy-forest-and-birds-ambience-211720.mp3" id="10_nk87g"]
 [ext_resource type="AudioStream" uid="uid://dbly1way4soge" path="res://assets/audio/parabéns2.mp3" id="11_wr16d"]
 [ext_resource type="AudioStream" uid="uid://bat6t3aryvs33" path="res://assets/audio/solução2.mp3" id="12_fwnr8"]
+[ext_resource type="AudioStream" uid="uid://dl0o0haepwuml" path="res://assets/audio/pergunta1.mp3" id="13_raq1m"]
+[ext_resource type="AudioStream" uid="uid://c421t313a84b3" path="res://assets/audio/pergunta2.mp3" id="14_esbqb"]
+[ext_resource type="AudioStream" uid="uid://y2kpkg245sl8" path="res://assets/audio/applause-75314.mp3" id="15_6wtw3"]
+[ext_resource type="AudioStream" uid="uid://cbsalgyra1iew" path="res://assets/audio/pig-sound-43195.mp3" id="15_miqx4"]
 
 [node name="AudioController" type="Node2D"]
 script = ExtResource("1_dsool")
@@ -64,6 +68,21 @@ volume_db = 10.0
 [node name="Answer2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_fwnr8")
 volume_db = 10.0
+
+[node name="Question1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_raq1m")
+volume_db = -10.0
+
+[node name="Question2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_esbqb")
+volume_db = -10.0
+
+[node name="pig" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_miqx4")
+
+[node name="applause" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_6wtw3")
+volume_db = -10.0
 
 [connection signal="finished" from="Answer1" to="." method="_on_answer_1_finished"]
 [connection signal="finished" from="Wrong" to="." method="_on_wrong_finished"]

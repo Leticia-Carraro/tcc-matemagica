@@ -52,7 +52,7 @@ func load_level(current_index: int):
 	if current_index == 1:
 		get_tree().change_scene_to_file("res://balanca_jogo/intro_to_balança.tscn")
 	elif current_index == 2:
-		get_tree().change_scene_to_file("res://Levels/Trunk_Puzzle.tscn")
+		get_tree().change_scene_to_file("res://Levels/Trunk_Puzzle_Introduction.tscn")
 	elif current_index == 3:
 		DisplayServer.tts_stop()
 		get_tree().change_scene_to_file("res://scenes/levels/level1.tscn")

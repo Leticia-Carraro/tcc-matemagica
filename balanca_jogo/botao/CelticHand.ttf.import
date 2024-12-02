@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/CelticHand.ttf-287b4ccf79a7591bc5d4a06f32af47
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

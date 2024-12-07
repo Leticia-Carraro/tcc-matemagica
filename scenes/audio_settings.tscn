@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://dixbbxuins4ky"]
+
+[ext_resource type="Script" path="res://scenes/menu/audio_settings.gd" id="1_k60yg"]
+[ext_resource type="Texture2D" uid="uid://b36uo5ivo4eem" path="res://assets/menu/Blue.png" id="2_3c3c4"]
+
+[sub_resource type="Theme" id="Theme_amlqb"]
+default_font_size = 50
+
+[node name="AudioSettings" type="Node"]
+script = ExtResource("1_k60yg")
+
+[node name="Backend" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3c3c4")
+stretch_mode = 1
+
+[node name="Pausado" type="Label" parent="Backend"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.5
+offset_top = -153.5
+offset_right = 246.5
+offset_bottom = -50.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+text = "Ajuste o Volume da Voz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Voz" type="SpinBox" parent="."]
+offset_left = 481.0
+offset_top = 321.0
+offset_right = 689.0
+offset_bottom = 398.0
+theme = SubResource("Theme_amlqb")
+min_value = 50.0
+value = 70.0
+alignment = 1
+update_on_text_changed = true
+select_all_on_focus = true
+
+[connection signal="focus_entered" from="Voz" to="." method="_on_voz_focus_entered"]
+[connection signal="value_changed" from="Voz" to="." method="_on_voz_value_changed"]

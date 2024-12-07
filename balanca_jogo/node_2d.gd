@@ -55,4 +55,4 @@ func speak_text(text: String):
 	var voices = DisplayServer.tts_get_voices_for_language("pt_BR")
 	var voice_id = voices[Global.selected_voice_id]
 
-	DisplayServer.tts_speak(text, voice_id, 50, 1.0, 0.8)
+	DisplayServer.tts_speak(text, voice_id, AudioController.volume, 1.0, 0.8)

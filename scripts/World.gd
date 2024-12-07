@@ -146,5 +146,5 @@ func _on_reset_timer_timeout():
 	
 func speak_exerc():
 	DisplayServer.tts_stop()
-	DisplayServer.tts_speak(speak_enum, speaker)
+	DisplayServer.tts_speak(speak_enum, speaker, AudioController.volume)
 	

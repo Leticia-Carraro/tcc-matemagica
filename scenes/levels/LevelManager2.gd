@@ -12,7 +12,7 @@ var counter #counts wrong answers
 var result
 var pitch = 1.0 #tts config
 var speed = 1.3 #tts config
-var volume = 70 #tts config
+var volume = AudioController.volume #tts config
 var speaker: String = DisplayServer.tts_get_voices_for_language("pt_BR")[0] #tts config
 var cur_position #current horizontal camera position
 var x_position #horizontal camera position

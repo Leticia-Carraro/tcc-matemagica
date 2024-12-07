@@ -25,8 +25,10 @@ func _on_continuar_pressed():
 	
 	
 func _on_audio_pressed():
-	pass
-
+	#DisplayServer.tts_stop() # Replace with function body.
+	AudioController._play_select()
+	DisplayServer.tts_stop()
+	get_tree().change_scene_to_file("res://scenes/audio_settings.tscn")
 
 func _on_sair_pressed():
 	DisplayServer.tts_stop() # Replace with function body.
@@ -35,15 +37,15 @@ func _on_sair_pressed():
 	get_tree().change_scene_to_file("res://level_selection/level_selection.tscn")
 
 func _on_audio_focus_entered():
-	DisplayServer.tts_speak("Áudio", speaker, volume, 1.0, speed, 1)
+	DisplayServer.tts_speak("Áudio", speaker, AudioController.volume, 1.0, speed, 1)
 	
 	
 func _on_continuar_focus_entered():
-	DisplayServer.tts_speak("Continuar", speaker, volume, 1.0, speed, 1)
+	DisplayServer.tts_speak("Continuar", speaker, AudioController.volume, 1.0, speed, 1)
 	
 	
 func _on_sair_focus_entered():
-	DisplayServer.tts_speak("Sair", speaker, volume, 1.0, speed, 1)
+	DisplayServer.tts_speak("Sair", speaker, AudioController.volume, 1.0, speed, 1)
 	
 	
 func _on_continuar_focus_exited():

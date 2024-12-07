@@ -47,13 +47,13 @@ func update_color():
 	# Muda a modulação do Sprite para a cor atual
 	$AnimatedSprite2D.modulate = colors[current_voice_index]
 	var voice_id = voices[current_voice_index]
-	DisplayServer.tts_speak("Olá! O que você acha dessa voz?", voice_id, 50, 1.0, 1.0)
+	DisplayServer.tts_speak("Olá! O que você acha dessa voz?", voice_id, AudioController.volume, 1.0, 1.0)
 
 func select_voice():
 	DisplayServer.tts_stop()
 	Global.selected_voice_id = current_voice_index
 	can_interact = false
-	DisplayServer.tts_speak("Você me escolheu! Vamos juntos nessa aventura!", voices[current_voice_index], 50, 1.0, 1.0)
+	DisplayServer.tts_speak("Você me escolheu! Vamos juntos nessa aventura!", voices[current_voice_index], AudioController.volume, 1.0, 1.0)
 	await get_tree().create_timer(3).timeout
 	$"../Label".text = ""
 	SceneTransitionAnimation.play("fade_in")

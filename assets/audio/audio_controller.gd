@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var mute: bool = false
+var volume = 70
 
 func _ready():
 	pass

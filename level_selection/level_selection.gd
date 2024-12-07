@@ -27,7 +27,10 @@ func _move_focus_forward():
 func _set_focus_to_current():
 	if is_instance_valid(focusable_nodes[current_index]):
 		focusable_nodes[current_index].grab_focus()
-	speak_text(focusable_nodes[current_index].text)	
+	if current_index == 0:
+		speak_text("Utilize Tab para escolher uma fase e depois pressione Enter")
+	else:
+		speak_text(focusable_nodes[current_index].text)	
 	if current_index == 1:
 		$Phase_1.play("new_animation") 
 		$Phase_2.play("RESET")
@@ -58,11 +61,11 @@ func load_level(current_index: int):
 		get_tree().change_scene_to_file("res://scenes/levels/level1.tscn")
 		
 	else:
-			speak_text("Escolha uma fase e depois pressione Enter")
+		speak_text("Utilize Tab para escolher uma fase e depois pressione Enter")
 
 func speak_text(text: String):
 	DisplayServer.tts_stop()
 	var voices = DisplayServer.tts_get_voices_for_language("pt_BR")
 	var voice_id = voices[Global.selected_voice_id]
 
-	DisplayServer.tts_speak(text, voice_id, 50, 1.0, 0.8)
+	DisplayServer.tts_speak(text, voice_id, AudioController.volume, 1.0, 1.0)

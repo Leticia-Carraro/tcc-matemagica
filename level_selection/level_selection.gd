@@ -58,7 +58,7 @@ func load_level(current_index: int):
 		get_tree().change_scene_to_file("res://Levels/Trunk_Puzzle_Introduction.tscn")
 	elif current_index == 3:
 		DisplayServer.tts_stop()
-		get_tree().change_scene_to_file("res://scenes/levels/level1.tscn")
+		get_tree().change_scene_to_file("res://scenes/menu/intro_animais.tscn")
 		
 	else:
 		speak_text("Utilize Tab para escolher uma fase e depois pressione Enter")

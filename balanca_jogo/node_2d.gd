@@ -8,6 +8,7 @@ var current_index: int = 0
 var conta
 
 func _ready():
+	AutoloadScene.previous_scene = "res://balanca_jogo/node_2d.tscn"
 	# Verifica se há nós válidos
 	if focusable_nodes.size() > 0:
 		_set_focus_to_current()
@@ -23,7 +24,6 @@ func _input(event: InputEvent):
 			DisplayServer.tts_stop()
 			AudioController._play_select()
 			AudioController._pause_backmusic(true)
-			AutoloadScene.previous_scene = "res://balanca_jogo/node_2d.tscn"
 			get_tree().change_scene_to_file("res://scenes/menu/menu_pausa.tscn")
 			
 # Alterna o foco para o próximo nó

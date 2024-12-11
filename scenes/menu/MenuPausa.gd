@@ -28,7 +28,7 @@ func _on_audio_pressed():
 	#DisplayServer.tts_stop() # Replace with function body.
 	AudioController._play_select()
 	DisplayServer.tts_stop()
-	get_tree().change_scene_to_file("res://scenes/audio_settings.tscn")
+	get_tree().change_scene_to_file("res://scenes/menu/audio_settings.tscn")
 
 func _on_sair_pressed():
 	DisplayServer.tts_stop() # Replace with function body.

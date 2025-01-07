@@ -38,7 +38,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent):
 	if first_time:
-		if (event is InputEventKey and (event.keycode == KEY_TAB or event.keycode == KEY_KP_ENTER) and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
+		if (event is InputEventKey and (event.keycode == KEY_TAB or event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and event.pressed) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
 			if falas_speak <= falas.size() - 1:
 				DisplayServer.tts_stop()
 				DisplayServer.tts_speak(falas[falas_speak], speaker)

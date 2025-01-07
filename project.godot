@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Mathistorys"
-run/main_scene="res://welcome/welcome_screen.tscn"
+run/main_scene="res://scenes/intro/welcome_screen.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
 [audio]
@@ -21,20 +21,20 @@ general/text_to_speech=true
 
 [autoload]
 
-AudioController="*res://assets/audio/audio_controller.tscn"
+AudioController="*res://scenes/levels/fase_animais/audio_controller.tscn"
 AutoloadScene="*res://scenes/game_objects/AutoloadScene.gd"
-Global="*res://config.gd"
+Global="*res://scenes/menu/config.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
 directories/dch_directory={
-"character": "res://assets/Char/character.dch",
-"narr": "res://assets/Char/narr.dch"
+"character": "res://assets/characters/character.dch",
+"narr": "res://assets/characters/narr.dch"
 }
 directories/dtl_directory={
 "Quiz": "res://assets/Timeline/Quiz.dtl",
-"intro_balanca": "res://balanca_jogo/intro_balanca.dtl",
+"intro_balanca": "res://scenes/levels/fase_balanca/intro_balanca.dtl",
 "rg_ans": "res://assets/Timeline/rg_ans.dtl",
 "wrong_ans": "res://assets/Timeline/wrong_ans.dtl",
 "wrong_simple": "res://assets/Timeline/wrong_simple.dtl"

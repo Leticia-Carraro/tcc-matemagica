@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://be2kgwgvjgdfb"]
+
+[ext_resource type="Script" path="res://scenes/levels/fase_animais/intro_animais.gd" id="1_v0t2k"]
+[ext_resource type="Texture2D" uid="uid://d2yeg2w2wx0tx" path="res://assets/background/IntroFaseAnimais.png" id="2_oso13"]
+[ext_resource type="AudioStream" uid="uid://qy3o6yphjfs7" path="res://assets/audio/saudacoes.mp3" id="3_3maa6"]
+[ext_resource type="AudioStream" uid="uid://djhyem2p36mff" path="res://assets/audio/explicarFase.mp3" id="4_vqc0i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duj83"]
+bg_color = Color(0, 0, 0, 0.568627)
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0.482353, 0.270588, 0.188235, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l5ti8"]
+font_size = 21
+outline_color = Color(0, 0, 0, 1)
+
+[node name="intro_animais" type="Node2D"]
+script = ExtResource("1_v0t2k")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1151.0
+offset_bottom = 655.0
+texture = ExtResource("2_oso13")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = 160.0
+offset_top = 248.0
+offset_right = 741.0
+offset_bottom = 363.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_duj83")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -305.5
+offset_top = -41.5
+offset_right = 305.5
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "PRESSIONE A TECLA 'ENTER' PARA CONTINUAR.
+PRESSIONE A TECLA  'R' PARA REPETIR A EXPLICAÇÃO."
+label_settings = SubResource("LabelSettings_l5ti8")
+horizontal_alignment = 1
+
+[node name="saudacoes" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3maa6")
+
+[node name="explicacao" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_vqc0i")

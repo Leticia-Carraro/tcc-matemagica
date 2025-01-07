@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://ta7c1b7bcp2e"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/Pig.gd" id="1_jdah7"]
+[ext_resource type="Script" path="res://scenes/game_objects/animal.gd" id="1_jdah7"]
 [ext_resource type="Texture2D" uid="uid://hjafnas7iai" path="res://assets/characters/raposinha.png" id="2_p5fg1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bu2vj"]

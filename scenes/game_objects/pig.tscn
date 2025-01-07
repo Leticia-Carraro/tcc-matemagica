@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://djt0c3m2mi6a2"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/Pig.gd" id="1_lmpmx"]
+[ext_resource type="Script" path="res://scenes/game_objects/animal.gd" id="1_lmpmx"]
 [ext_resource type="Texture2D" uid="uid://dllnub0nexfri" path="res://assets/characters/IdlePig-removebg-preview.png" id="2_wau8g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xj1nv"]

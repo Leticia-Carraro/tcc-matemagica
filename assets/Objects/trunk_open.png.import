@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpxkd2e7ftjl7"
-path="res://.godot/imported/trunk_open.png-b936aed4a426901a6606d8a6d60ce764.ctex"
+path="res://.godot/imported/trunk_open.png-8a7a12ec91bd16f12bc4378bb708a847.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Objects/trunk_open.png"
-dest_files=["res://.godot/imported/trunk_open.png-b936aed4a426901a6606d8a6d60ce764.ctex"]
+source_file="res://assets/objects/trunk_open.png"
+dest_files=["res://.godot/imported/trunk_open.png-8a7a12ec91bd16f12bc4378bb708a847.ctex"]
 
 [params]
 
